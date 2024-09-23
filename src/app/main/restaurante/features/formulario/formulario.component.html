@@ -1,0 +1,24 @@
+<form class="example-form" [formGroup]="formulario" (ngSubmit)="cadastra()">
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width th8">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width th2">
+      <mat-label>CNPJ</mat-label>
+      <input matInput formControlName="cnpj">
+    </mat-form-field></td>
+  </tr></table>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Estrelas</mat-label>
+      <input matInput placeholder="0 à 3" formControlName="estrelas">
+    </mat-form-field></td>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Tipo Comida</mat-label>
+      <input matInput placeholder="Ex. Vegetariana" formControlName="tipoComida">
+    </mat-form-field></td>
+  </tr></table>
+  <button mat-raised-button color="primary" [disabled]="!formulario.valid">Cadastrar</button>
+</form>
