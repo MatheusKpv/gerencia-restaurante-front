@@ -26,7 +26,7 @@ editaRestaurante(id: number) {
   constructor(private service: RestauranteService, private router: Router, private bottomSheet: MatBottomSheet) { };
 
   openBottomSheet(id: number): void {
-    this.bottomSheet.open(BotaoNavegacaoComponent);
+    this.bottomSheet.open(BotaoNavegacaoComponent, { data: id });
   }
 
   ngOnInit(): void {

@@ -1,23 +1,22 @@
 <mat-nav-list>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>money</mat-icon>
-      <label>afwef</label>
-    </button>
-
-  <a routerLink="/restaurante/" mat-list-item (click)="openLink($event)">
+  <a mat-list-item (click)="openLink($event)" id="financeiro">
     <span matListItemTitle>
       <mat-icon>money</mat-icon>
-      <label>nsed</label>
+      <label>Financeiro</label>
     </span>
   </a>
 
-  <a href="https://plus.google.com/" mat-list-item (click)="openLink($event)">
-    <span matListItemTitle>Google Plus</span>
-    <span matLine>Share with your friends</span>
+  <a mat-list-item (click)="openLink($event)" id="cliente">
+    <span matListItemTitle>
+      <mat-icon>person</mat-icon>
+      <label>Clientes</label>
+    </span>
   </a>
 
-  <a href="https://hangouts.google.com/" mat-list-item (click)="openLink($event)">
-    <span matListItemTitle>Google Hangouts</span>
-    <span matLine>Show to your coworkers</span>
+  <a mat-list-item (click)="openLink($event)" id="cliente">
+    <span matListItemTitle>
+      <mat-icon>supervisor_account</mat-icon>
+      <label>Funcionarios</label>
+    </span>
   </a>
 </mat-nav-list>
