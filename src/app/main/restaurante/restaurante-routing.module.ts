@@ -8,7 +8,9 @@ const routes: Routes = [
   {path: '', redirectTo: 'lista', pathMatch: 'full'},
   {path: 'lista', component: ListaComponent},
   {path: 'formulario', component: FormularioComponent},
+  {path: 'formulario/:id', component: FormularioComponent},
   {path: 'financeiro', component: FinanceiroComponent},
+  {path: 'financeiro/:id', component: FinanceiroComponent},
 ];
 
 @NgModule({

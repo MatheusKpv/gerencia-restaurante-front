@@ -9,12 +9,11 @@ import { Router } from '@angular/router';
   styleUrl: './lista.component.scss'
 })
 export class ListaComponent implements OnInit {
-deletaRestaurante(id: number) {
-  this.service.deleteRestaurante(id);
+financeiroRestaurante(id: number) {
+  this.router.navigate(['/restaurante/financeiro', id]);
 }
 editaRestaurante(id: number) {
-  this.router.navigate(['/restaurante/formulario', id])
-  // this.service.editaRestaurante(restaurante);
+  this.router.navigate(['/restaurante/formulario', id]);
 }
   listaRestaurantes: Restaurante[] = [];
   displayedColumns: string[] = ['id', 'nome', 'cnpj', 'estrelas', 'tipoComida', 'botoes'];
@@ -22,6 +21,7 @@ editaRestaurante(id: number) {
   constructor(private service: RestauranteService, private router: Router) { };
 
   ngOnInit(): void {
+    //TO DO : AJUSTAR ORDENACAO DE LISTA
     this.service.getListaRestaurantes().subscribe(lista => {
       this.listaRestaurantes = lista
     })

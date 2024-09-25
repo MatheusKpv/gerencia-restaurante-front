@@ -1,3 +1,5 @@
+import { TipoComida } from "./tipoComida.enum";
+
 export interface Restaurante {
   id: number,
   nome: string,
