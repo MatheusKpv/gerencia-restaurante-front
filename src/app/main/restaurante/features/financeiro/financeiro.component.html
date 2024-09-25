@@ -17,7 +17,7 @@
             <mat-icon>search</mat-icon>
           </button>
         </mat-card-content>
-        <mat-card-content *ngIf="faturamentoDia == null;else faturamentoTempl">
+        <mat-card-content>
           <table mat-table [dataSource]="faturamento" class="mat-elevation-z8">
             <ng-container matColumnDef="data">
               <th mat-header-cell *matHeaderCellDef> Data </th>

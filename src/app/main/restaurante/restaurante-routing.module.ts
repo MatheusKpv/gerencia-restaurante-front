@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'formulario', component: FormularioComponent},
   {path: 'formulario/:id', component: FormularioComponent},
   {path: 'financeiro', component: FinanceiroComponent},
-  {path: 'financeiro/:id', component: FinanceiroComponent},
+  {path: ':id/financeiro', component: FinanceiroComponent},
 ];
 
 @NgModule({

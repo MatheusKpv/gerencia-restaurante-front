@@ -8,6 +8,12 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+import {MatListModule} from '@angular/material/list';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { CommonModule, DatePipe } from '@angular/common';
 
@@ -20,6 +26,7 @@ import { CabecalhoComponent } from './features/cabecalho/cabecalho.component';
 import {AsyncPipe} from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BotaoNavegacaoComponent } from './features/botao-navegacao/botao-navegacao.component';
 
 
 @NgModule({
@@ -28,7 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FinanceiroComponent,
     ListaComponent,
     FormularioComponent,
-    CabecalhoComponent
+    CabecalhoComponent,
+    BotaoNavegacaoComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +53,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     AsyncPipe,
     MatDatepickerModule,
-    MatCardModule
+    MatCardModule,
+    MatBottomSheetModule,
+    MatListModule
   ],
   providers: [
     provideNativeDateAdapter()
