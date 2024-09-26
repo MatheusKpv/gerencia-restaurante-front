@@ -5,12 +5,18 @@ import { FormularioComponent } from './features/formulario/formulario.component'
 import { FinanceiroComponent } from './features/financeiro/financeiro.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'lista', pathMatch: 'full'},
-  {path: 'lista', component: ListaComponent},
-  {path: 'formulario', component: FormularioComponent},
-  {path: 'formulario/:id', component: FormularioComponent},
-  {path: 'financeiro', component: FinanceiroComponent},
-  {path: ':id/financeiro', component: FinanceiroComponent},
+  { path: '', redirectTo: 'lista', pathMatch: 'full' },
+  { path: 'lista', component: ListaComponent },
+  { path: 'formulario', component: FormularioComponent },
+  { path: 'financeiro', component: FinanceiroComponent },
+  { path: ':id', redirectTo: ':id/financeiro', pathMatch: 'full' },
+  {
+    path: ':id', children: [
+      { path: 'formulario', component: FormularioComponent },
+      { path: 'financeiro', component: FinanceiroComponent },
+      { path: 'cliente', loadChildren: () => import('../cliente/cliente.module').then(c => c.ClienteModule) },
+    ]
+  }
 ];
 
 @NgModule({

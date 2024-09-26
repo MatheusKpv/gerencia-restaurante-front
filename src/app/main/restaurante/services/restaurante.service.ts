@@ -1,13 +1,27 @@
+import { Restaurante } from './../models/restaurante';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take } from 'rxjs';
-import { Restaurante } from '../models/restaurante';
+import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestauranteService {
+  // private listaRestaurantesSubject = new BehaviorSubject<Restaurante[]>([]);
+  // listaRestaurantes$ = this.listaRestaurantesSubject.asObservable();
+
+  constructor(
+    private http: HttpClient,
+    private datePipe: DatePipe
+  ) { }
+
+  // carregarListaRestaurantes() {
+  //   return this.http.get<Restaurante[]>('http://localhost:8080/restaurante').pipe(
+  //     tap(lista => this.listaRestaurantesSubject.next(lista)) // Atualiza a lista
+  //   );
+  // }
+
   getDiaMaiorFaturamentoMes(id: number, mes: number) {
     console.log(mes);
     const params = new HttpParams().set('mes', mes);
@@ -27,19 +41,11 @@ export class RestauranteService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http.put(`http://localhost:8080/restaurante/${id}`, JSON.stringify(restaurante), { headers }).subscribe();
   }
-  financeiroRestaurante(id: number) {
-    //TO DO : INCREMENTAR DELETE
-    throw new Error('Method not implemented.');
-  }
+
   postRestaurante(formulario: any) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http.post<Restaurante>('http://localhost:8080/restaurante', JSON.stringify(formulario), { headers }).subscribe();
   }
-
-  constructor(
-    private http: HttpClient,
-    private datePipe: DatePipe
-  ) { }
 
   getListaRestaurantes() {
     return this.http.get<Restaurante[]>('http://localhost:8080/restaurante')
