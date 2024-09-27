@@ -25,6 +25,7 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('aq');
     this.listaRestaurantes = [];
     // TO DO : AJUSTAR ORDENACAO DE LISTA
     this.service.getListaRestaurantes().subscribe(lista => {

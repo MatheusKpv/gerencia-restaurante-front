@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../models/cliente';
 import { ClienteService } from '../../services/cliente.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BotaoNavegacaoComponent } from '../botao-navegacao/botao-navegacao.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-lista',
@@ -15,7 +16,7 @@ export class ListaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'sobrenome', 'cpf', 'dataNascimento', 'sexo',
     'telefone', 'idRestaurante', 'dataCadastro', 'quantidadeReservas', 'quantidadeValorGasto', 'flgBloqueado', 'botoes'];
 
-  constructor(private service: ClienteService, private router: Router, private bottomSheet: MatBottomSheet) { };
+  constructor(private service: ClienteService, private router: Router, private bottomSheet: MatBottomSheet, private route: ActivatedRoute) { };
 
   editaCliente(id: number) {
     this.router.navigate([`/restaurante/${id}/formulario`]);
@@ -26,11 +27,16 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listaClientes = [];
-  //   // TO DO : AJUSTAR ORDENACAO DE LISTA
-    this.service.getListaClientes().subscribe(lista => {
-      this.listaClientes = lista
-      console.log(this.listaClientes);
+    this.route.parent?.paramMap.subscribe(param => {
+      const idRestaurante = param.get('id');
+      this.service.getListaClientes().pipe(
+        map(clientes => clientes.filter(cliente => cliente.idRestaurante == Number(idRestaurante)))
+      )
+      .subscribe(lista => {
+        this.listaClientes = lista
+        console.log(this.listaClientes);
+      })
     })
+  //   // TO DO : AJUSTAR ORDENACAO DE LISTA
   }
 }

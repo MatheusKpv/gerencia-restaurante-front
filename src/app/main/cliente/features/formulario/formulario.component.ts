@@ -15,8 +15,13 @@ export class FormularioComponent implements OnInit {
   clienteEdit: Cliente | undefined = undefined;
 
   cadastra() {
-    this.clienteEdit ? this.service.editaCliente(this.clienteEdit.id, this.formulario.value) : this.service.postCliente(this.formulario.value)
-    this.router.navigate([ajustaRota(this.router), 'lista']);
+    if (this.clienteEdit) {
+      this.service.editaCliente(this.clienteEdit.id, this.formulario.value).subscribe()
+      this.router.navigate([ajustaRota(this.router), 'lista']);
+    } else {
+      this.service.postCliente(this.formulario.value)
+      this.router.navigate([ajustaRota(this.router), 'lista']);
+    }
   }
 
   constructor(
@@ -64,7 +69,7 @@ function initForm(builder: FormBuilder, idRestaurante: any) {
     sexo: [null, Validators.required],
     telefone: [null, Validators.required],
     idRestaurante: [idRestaurante],
-    dataCadastro: [null, Validators.required]
+    dataCadastro: [null]
   })
 }
 

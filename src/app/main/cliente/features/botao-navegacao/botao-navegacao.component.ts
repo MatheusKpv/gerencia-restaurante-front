@@ -21,8 +21,6 @@ export class BotaoNavegacaoComponent {
     event.preventDefault();
     const target = (event.target as HTMLElement).closest('a');
     const rotaAnterior = this.router.url.split('/').slice(0, -1).join('/');
-    console.log(target?.id);
-    console.log(rotaAnterior);
 
     if (target?.id == 'edit') {
       this.router.navigate([rotaAnterior, this.idCliente, `formulario`])
@@ -30,6 +28,11 @@ export class BotaoNavegacaoComponent {
 
     if (target?.id == 'remove') {
       this.service.removeCliente(this.idCliente);
+      this.router.navigate([rotaAnterior])
+    }
+
+    if (target?.id == 'desbloqueia') {
+      this.service.desbloqueiaCliente(this.idCliente);
       this.router.navigate([rotaAnterior])
     }
   }
