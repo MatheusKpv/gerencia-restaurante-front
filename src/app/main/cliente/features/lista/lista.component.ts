@@ -14,7 +14,7 @@ import { map } from 'rxjs';
 export class ListaComponent implements OnInit {
   listaClientes: Cliente[] = [];
   displayedColumns: string[] = ['id', 'nome', 'sobrenome', 'cpf', 'dataNascimento', 'sexo',
-    'telefone', 'idRestaurante', 'dataCadastro', 'quantidadeReservas', 'quantidadeValorGasto', 'flgBloqueado', 'botoes'];
+    'telefone', 'dataCadastro', 'quantidadeReservas', 'quantidadeValorGasto', 'flgBloqueado', 'botoes'];
 
   constructor(private service: ClienteService, private router: Router, private bottomSheet: MatBottomSheet, private route: ActivatedRoute) { };
 
