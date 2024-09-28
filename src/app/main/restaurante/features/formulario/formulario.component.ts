@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RestauranteService } from '../../services/restaurante.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Restaurante } from '../../models/restaurante';
+import { TipoComida } from '../../models/tipoComida.enum';
 
 @Component({
   selector: 'app-formulario',
@@ -12,23 +13,33 @@ import { Restaurante } from '../../models/restaurante';
 export class FormularioComponent implements OnInit {
   formulario!: FormGroup;
   restauranteEdit: Restaurante | undefined = undefined;
+  tiposComida = Object.keys(TipoComida).filter(key => isNaN(Number(key)));
 
   cadastra() {
-    // this.restauranteEdit ? this.service.editaRestaurante(this.restauranteEdit.id, this.formulario.value) : this.service.postRestaurante(this.formulario.value)
     if (this.restauranteEdit) {
       this.service.editaRestaurante(
         this.restauranteEdit.id,
         this.formulario.value
-      ).subscribe( response => {
-        this.restauranteEdit = response;
-        this.router.navigate(['/restaurante/lista']);
-      });
-    } else {
-      this.service
-        .postRestaurante(this.formulario.value).subscribe(response => {
+      ).subscribe(
+        (response) => {
           this.restauranteEdit = response;
           this.router.navigate(['/restaurante/lista']);
-        })
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      );
+    } else {
+      this.service
+        .postRestaurante(this.formulario.value).subscribe(
+          (response) => {
+            this.restauranteEdit = response;
+            this.router.navigate(['/restaurante/lista']);
+          },
+          (error) => {
+            alert(error.error.message);
+          }
+        )
     }
 
   }
@@ -38,7 +49,7 @@ export class FormularioComponent implements OnInit {
     private service: RestauranteService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formulario = initForm(this.buider);
@@ -47,7 +58,6 @@ export class FormularioComponent implements OnInit {
       if (id) {
         this.service.findById(id).subscribe((response) => {
           this.restauranteEdit = response;
-          console.log(this.restauranteEdit);
           if (this.restauranteEdit) {
             this.formulario.patchValue({
               nome: this.restauranteEdit.nome,
@@ -69,7 +79,3 @@ function initForm(builder: FormBuilder) {
     tipoComida: [null, Validators.required],
   });
 }
-
-// function getOrdinalTipoComida(tipoComida: string): number {
-//   return TipoComida[tipoComida as keyof typeof TipoComida];
-// }

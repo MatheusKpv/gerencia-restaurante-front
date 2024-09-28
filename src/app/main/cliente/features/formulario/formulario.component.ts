@@ -13,16 +13,7 @@ import { Sexo } from '../../models/sexo.enum';
 export class FormularioComponent implements OnInit {
   formulario!: FormGroup;
   clienteEdit: Cliente | undefined = undefined;
-
-  cadastra() {
-    if (this.clienteEdit) {
-      this.service.editaCliente(this.clienteEdit.id, this.formulario.value).subscribe()
-      this.router.navigate([ajustaRota(this.router), 'lista']);
-    } else {
-      this.service.postCliente(this.formulario.value)
-      this.router.navigate([ajustaRota(this.router), 'lista']);
-    }
-  }
+  opSexo = Object.keys(Sexo).filter(key => isNaN(Number(key)));
 
   constructor(
     private buider: FormBuilder,
@@ -30,6 +21,28 @@ export class FormularioComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) { };
+
+  cadastra() {
+    if (this.clienteEdit) {
+      this.service.editaCliente(this.clienteEdit.id, this.formulario.value).subscribe(
+        (response) => {
+          this.router.navigate([ajustaRota(this.router), 'lista']);
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      );
+    } else {
+      this.service.postCliente(this.formulario.value).subscribe(
+        (response) => {
+          this.router.navigate([ajustaRota(this.router), 'lista']);
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      );
+    }
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(param => {
@@ -40,7 +53,6 @@ export class FormularioComponent implements OnInit {
         this.service.findById(idCliente).subscribe(
           (response) => {
             this.clienteEdit = response;
-            console.log(this.clienteEdit);
             if (this.clienteEdit) {
               this.formulario.patchValue({
                 nome: this.clienteEdit.nome,
@@ -58,9 +70,8 @@ export class FormularioComponent implements OnInit {
     })
   }
 }
-function initForm(builder: FormBuilder, idRestaurante: any) {
-  console.log(idRestaurante);
 
+function initForm(builder: FormBuilder, idRestaurante: any) {
   return builder.group({
     nome: [null, Validators.required],
     sobrenome: [null, Validators.required],
@@ -82,4 +93,3 @@ function ajustaRota(router: Router): any {
   const indexCliente = arrayRouter.indexOf('cliente');
   return arrayRouter.slice(0, indexCliente + 1).join('/');
 }
-

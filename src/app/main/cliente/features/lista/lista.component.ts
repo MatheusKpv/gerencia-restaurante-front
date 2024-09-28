@@ -31,12 +31,9 @@ export class ListaComponent implements OnInit {
       const idRestaurante = param.get('id');
       this.service.getListaClientes().pipe(
         map(clientes => clientes.filter(cliente => cliente.idRestaurante == Number(idRestaurante)))
-      )
-      .subscribe(lista => {
-        this.listaClientes = lista
-        console.log(this.listaClientes);
-      })
+      ).subscribe(lista => {
+          this.listaClientes = lista
+        })
     })
-  //   // TO DO : AJUSTAR ORDENACAO DE LISTA
   }
 }

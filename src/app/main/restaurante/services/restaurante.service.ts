@@ -9,19 +9,10 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class RestauranteService {
-  // private listaRestaurantesSubject = new BehaviorSubject<Restaurante[]>([]);
-  // listaRestaurantes$ = this.listaRestaurantesSubject.asObservable();
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) {}
-
-  // carregarListaRestaurantes() {
-  //   return this.http.get<Restaurante[]>('http://localhost:8080/restaurante').pipe(
-  //     tap(lista => this.listaRestaurantesSubject.next(lista)) // Atualiza a lista
-  //   );
-  // }
+  constructor(private http: HttpClient, private datePipe: DatePipe) {};
 
   getDiaMaiorFaturamentoMes(id: number, mes: number) {
-    console.log(mes);
     const params = new HttpParams().set('mes', mes);
     return this.http.get(
       `http://localhost:8080/restaurante/dia-maior-faturamento-mes/${id}`,
@@ -33,7 +24,6 @@ export class RestauranteService {
       data,
       'yyyy-MM-dd'
     );
-    console.log(dataFormatada);
     const params = new HttpParams().set('data', dataFormatada!);
     return this.http.get(
       `http://localhost:8080/restaurante/faturamento-dia/${id}`,
@@ -46,7 +36,6 @@ export class RestauranteService {
     );
   }
   editaRestaurante(id: number, restaurante: any) : Observable<Restaurante> {
-    console.log(restaurante);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<Restaurante>(
       `http://localhost:8080/restaurante/${id}`,

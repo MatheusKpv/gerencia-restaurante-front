@@ -11,8 +11,6 @@ export class FinanceiroComponent implements OnInit{
 buscarMaiorFaturamentoMes() {
   this.service.getDiaMaiorFaturamentoMes(this.id!, this.mesInput!).subscribe(
     (response:any) => {
-      console.log(response);
-
       this.faturamento = [
         {
           data: response.data,

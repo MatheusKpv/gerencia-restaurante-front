@@ -1,13 +1,15 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
+  <button mat-icon-button class="example-icon" aria-label="Home" routerLink="restaurante/lista">
+    <mat-icon>home</mat-icon>
   </button>
-  <span>Restaurante</span>
+
+  <span>{{ getTitle() }}</span>
+
   <span class="example-spacer"></span>
+
   <section>
     <div class="example-button-row">
-      <a mat-raised-button routerLink="/restaurante/lista" >Lista</a>
-      <a mat-raised-button routerLink="/restaurante/formulario">Cadastro</a>
+      <a *ngFor="let button of getButtons()" mat-raised-button [routerLink]="button.link">{{ button.label }}</a>
     </div>
   </section>
 </mat-toolbar>

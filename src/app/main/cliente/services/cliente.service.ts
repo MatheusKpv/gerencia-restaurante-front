@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cliente } from '../models/cliente';
 import { map, Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,11 @@ export class ClienteService {
   ) { };
 
   desbloqueiaCliente(id: number) {
-    this.http.put(`http://localhost:8080/cliente/desbloqueio/${id}`, {}).subscribe();
+    return this.http.put(`http://localhost:8080/cliente/desbloqueio/${id}`, {});
   }
 
   removeCliente(id: number) {
-    this.http.delete(`http://localhost:8080/cliente/bloqueio/${id}`).subscribe();
+    return this.http.delete(`http://localhost:8080/cliente/bloqueio/${id}`);
   }
 
   findById(id: number): Observable<Cliente> {
@@ -26,14 +27,16 @@ export class ClienteService {
   }
 
   editaCliente(id: number, cliente: any) {
-    console.log(cliente);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(`http://localhost:8080/cliente/${id}`, JSON.stringify(cliente), { headers });
   }
 
   postCliente(formulario: any) {
-    console.log(formulario);
-
+    const dataFormatada: string | null = this.datePipe.transform(
+      formulario.dataNascimento,
+      'yyyy-MM-dd'
+    );
+    formulario.dataNascimento = dataFormatada;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<Cliente>('http://localhost:8080/cliente', JSON.stringify(formulario), { headers });
   }

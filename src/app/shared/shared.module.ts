@@ -13,8 +13,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -34,7 +34,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDatepickerModule,
     MatCardModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ],
   exports: [
     CommonModule,
@@ -52,7 +54,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatDatepickerModule,
     MatCardModule,
     MatBottomSheetModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

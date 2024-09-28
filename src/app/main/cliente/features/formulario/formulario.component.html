@@ -1,37 +1,50 @@
 <div class="formulario">
   <form class="example-form" [formGroup]="formulario" (submit)="cadastra()">
-    <table class="example-full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Nome</mat-label>
-        <input matInput formControlName="nome">
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Sobrenome</mat-label>
-        <input matInput formControlName="sobrenome">
-      </mat-form-field></td>
-    </tr></table>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome">
+          </mat-form-field></td>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>Sobrenome</mat-label>
+            <input matInput formControlName="sobrenome">
+          </mat-form-field></td>
+      </tr>
+    </table>
 
-    <table class="example-full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>CPF</mat-label>
-        <input matInput formControlName="cpf">
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Data Nascimento</mat-label>
-        <input matInput placeholder="adicionar calendario" formControlName="dataNascimento">
-      </mat-form-field></td>
-    </tr></table>
-    <table class="example-full-width" cellspacing="0"><tr>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Sexo</mat-label>
-        <input matInput formControlName="sexo">
-      </mat-form-field></td>
-      <td><mat-form-field class="example-full-width">
-        <mat-label>Telefone</mat-label>
-        <input matInput formControlName="telefone">
-      </mat-form-field></td>
-    </tr></table>
-    
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>CPF</mat-label>
+            <input matInput formControlName="cpf">
+          </mat-form-field></td>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>data</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dataNascimento">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field></td>
+      </tr>
+    </table>
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>Sexo</mat-label>
+            <!-- <input matInput formControlName="sexo"> -->
+            <mat-select formControlName="sexo">
+              @for (op of opSexo; track op) {
+              <mat-option [value]="op">{{op}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field></td>
+        <td><mat-form-field class="example-full-width">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone">
+          </mat-form-field></td>
+      </tr>
+    </table>
+
     <button mat-raised-button color="primary" [disabled]="!formulario.valid">Cadastrar</button>
   </form>
 </div>

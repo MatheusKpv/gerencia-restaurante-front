@@ -25,26 +25,9 @@ export class ListaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('aq');
     this.listaRestaurantes = [];
-    // TO DO : AJUSTAR ORDENACAO DE LISTA
     this.service.getListaRestaurantes().subscribe(lista => {
       this.listaRestaurantes = lista
-      console.log(this.listaRestaurantes);
     })
-
-    // this.service.carregarListaRestaurantes().subscribe({
-    //   next: () => {
-    //     console.log('Lista carregada com sucesso');
-    //   },
-    //   error: err => {
-    //     console.error('Erro ao carregar a lista:', err);
-    //   }
-    // });
-    // this.service.listaRestaurantes$.subscribe(lista => {
-    //   this.listaRestaurantes = lista;
-    //   // Aqui você pode ter certeza de que a lista foi atualizada
-    //   console.log('Lista atualizada:', this.listaRestaurantes);
-    // });
   }
 }

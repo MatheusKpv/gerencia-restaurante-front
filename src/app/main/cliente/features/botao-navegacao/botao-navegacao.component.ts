@@ -27,13 +27,25 @@ export class BotaoNavegacaoComponent {
     }
 
     if (target?.id == 'remove') {
-      this.service.removeCliente(this.idCliente);
-      this.router.navigate([rotaAnterior])
+      this.service.removeCliente(this.idCliente).subscribe(
+        (response) => {
+          this.router.navigate([rotaAnterior]).then(() => window.location.reload())
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      )
     }
 
     if (target?.id == 'desbloqueia') {
-      this.service.desbloqueiaCliente(this.idCliente);
-      this.router.navigate([rotaAnterior])
+      this.service.desbloqueiaCliente(this.idCliente).subscribe(
+        (response) => {
+          this.router.navigate([rotaAnterior]).then(() => window.location.reload())
+        },
+        (error) => {
+          alert(error.error.message);
+        }
+      )
     }
   }
 }
